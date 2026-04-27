@@ -1,20 +1,19 @@
 import React from 'react';
-
-const steps = [
-  { n: '01', t: 'Discover', d: 'A two-week sprint to map workflows, interview stakeholders and quantify the opportunity. You leave with a prioritized AI roadmap whether or not we keep working together.' },
-  { n: '02', t: 'Design', d: 'Architecture, data flow, and brand-grade UX. We prototype the critical path in code, not slides — so risk shows up early, not at launch.' },
-  { n: '03', t: 'Build', d: 'Senior engineers ship in two-week increments with weekly demos. Evals run from day one. You see real metrics, not progress bars.' },
-  { n: '04', t: 'Operate', d: 'Hand-off, training, monitoring. We stay on as a fractional AI team — quarterly reviews, model updates, and feature iteration baked in.' },
-];
+import { useLocale } from '../i18n/LocaleContext.jsx';
 
 export default function Process() {
+  const { t } = useLocale();
+  const steps = t.process.steps.map((s, i) => ({ ...s, n: String(i + 1).padStart(2, '0') }));
+
   return (
     <section id="process" className="process">
       <div className="container">
         <div className="section-head reveal">
-          <span className="eyebrow"><span className="dot" />How we work</span>
-          <h2>From <span className="gradient-text">first call</span> to <span className="gradient-text">production</span> in 60 days.</h2>
-          <p>A repeatable, transparent process built around evidence — not opinions. Every phase has a deliverable you can show your board.</p>
+          <span className="eyebrow"><span className="dot" />{t.process.eyebrow}</span>
+          <h2>
+            {t.process.titleA} <span className="gradient-text">{t.process.accentA}</span> {t.process.titleB}
+          </h2>
+          <p>{t.process.sub}</p>
         </div>
 
         <div className="steps">

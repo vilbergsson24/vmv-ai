@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import LanguageSwitcher from './LanguageSwitcher.jsx';
+import { useLocale } from '../i18n/LocaleContext.jsx';
 
 export default function Navbar() {
+  const { t } = useLocale();
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -27,14 +30,15 @@ export default function Navbar() {
         </a>
 
         <nav className="nav__links" aria-label="Main">
-          <a href="#services">Services</a>
-          <a href="#process">Process</a>
-          <a href="#work">Work</a>
-          <a href="#testimonials">Clients</a>
+          <a href="#services">{t.nav.services}</a>
+          <a href="#process">{t.nav.process}</a>
+          <a href="#work">{t.nav.work}</a>
+          <a href="#testimonials">{t.nav.clients}</a>
         </nav>
 
         <div className="nav__cta">
-          <a href="#contact" className="btn btn-ghost">Book a call</a>
+          <LanguageSwitcher />
+          <a href="#contact" className="btn btn-ghost nav__book">{t.nav.cta}</a>
         </div>
       </div>
 
@@ -62,8 +66,10 @@ export default function Navbar() {
         .nav__links { display: flex; gap: 28px; }
         .nav__links a { font-size: 14px; color: var(--text-muted); transition: color 150ms ease; }
         .nav__links a:hover { color: var(--text); }
+        .nav__cta { display: flex; align-items: center; gap: 10px; }
         @media (max-width: 768px) {
           .nav__links { display: none; }
+          .nav__book { display: none; }
         }
       `}</style>
     </header>

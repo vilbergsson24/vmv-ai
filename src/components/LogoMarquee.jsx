@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLocale } from '../i18n/LocaleContext.jsx';
 
 const logos = [
   'Helix', 'Northwind', 'Kallio', 'Vantage', 'Polaris',
@@ -6,11 +7,12 @@ const logos = [
 ];
 
 export default function LogoMarquee() {
+  const { t } = useLocale();
   const list = [...logos, ...logos];
   return (
-    <section className="marquee" aria-label="Trusted by">
+    <section className="marquee" aria-label={t.marquee.label}>
       <div className="container marquee__head">
-        <span className="marquee__label">Trusted by teams shipping the future</span>
+        <span className="marquee__label">{t.marquee.label}</span>
       </div>
       <div className="marquee__track-wrap">
         <div className="marquee__track">

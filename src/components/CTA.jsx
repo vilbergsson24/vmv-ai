@@ -1,6 +1,8 @@
 import React from 'react';
+import { useLocale } from '../i18n/LocaleContext.jsx';
 
 export default function CTA() {
+  const { t } = useLocale();
   return (
     <section id="contact" className="cta">
       <div className="container">
@@ -19,20 +21,20 @@ export default function CTA() {
           </div>
 
           <div className="cta__inner">
-            <span className="eyebrow"><span className="dot" />Now booking Q3 engagements</span>
-            <h2>Let’s build something <span className="gradient-text">unreasonably good.</span></h2>
-            <p>Tell us about the workflow that should not exist. We will respond within one business day with a 30-minute discovery call and a written first-look.</p>
+            <span className="eyebrow"><span className="dot" />{t.cta.eyebrow}</span>
+            <h2>{t.cta.title} <span className="gradient-text">{t.cta.accent}</span></h2>
+            <p>{t.cta.sub}</p>
 
-            <form className="cta__form" onSubmit={(e) => { e.preventDefault(); alert('Thanks — we will be in touch.'); }}>
-              <input type="email" required placeholder="you@company.com" aria-label="Email" />
+            <form className="cta__form" onSubmit={(e) => { e.preventDefault(); alert(t.cta.thanks); }}>
+              <input type="email" required placeholder={t.cta.placeholder} aria-label="Email" />
               <button type="submit" className="btn btn-primary">
-                Start the conversation
+                {t.cta.submit}
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M5 12h14M13 5l7 7-7 7"/>
                 </svg>
               </button>
             </form>
-            <div className="cta__small">No spam. No newsletters. Just a reply from a founder.</div>
+            <div className="cta__small">{t.cta.small}</div>
           </div>
         </div>
       </div>

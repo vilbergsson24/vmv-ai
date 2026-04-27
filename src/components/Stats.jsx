@@ -1,18 +1,13 @@
 import React from 'react';
-
-const stats = [
-  { v: '$42M', l: 'measured client savings', s: 'across 28 active engagements' },
-  { v: '14 days', l: 'average to first AI prototype', s: 'from kickoff to working demo' },
-  { v: '3.8×', l: 'average team productivity gain', s: 'measured 90 days post-launch' },
-  { v: '0', l: 'ghosted projects', s: 'since the studio was founded' },
-];
+import { useLocale } from '../i18n/LocaleContext.jsx';
 
 export default function Stats() {
+  const { t } = useLocale();
   return (
     <section className="stats">
       <div className="container">
         <div className="stats__grid">
-          {stats.map((s, i) => (
+          {t.stats.map((s, i) => (
             <div className="stats__card reveal" key={s.l} style={{ transitionDelay: `${i * 70}ms` }}>
               <div className="stats__value gradient-text">{s.v}</div>
               <div className="stats__label">{s.l}</div>

@@ -1,88 +1,27 @@
 import React from 'react';
+import { useLocale } from '../i18n/LocaleContext.jsx';
 
-const services = [
-  {
-    title: 'AI Automation',
-    desc: 'Custom agents, RAG systems and workflow orchestration that replace repetitive work — from sales ops to internal tooling.',
-    bullets: ['LLM agents & tool use', 'RAG / vector search', 'Workflow orchestration'],
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="3" />
-        <path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1" />
-      </svg>
-    ),
-    accent: 'violet',
-  },
-  {
-    title: 'Digitalization',
-    desc: 'We map analog and legacy processes, then rebuild them as modern, measurable, API-first systems your team actually wants to use.',
-    bullets: ['Process audit & mapping', 'Custom dashboards', 'Internal tools & portals'],
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="3" y="4" width="18" height="14" rx="2"/>
-        <path d="M3 10h18M8 14h2M12 14h4"/>
-      </svg>
-    ),
-    accent: 'cyan',
-  },
-  {
-    title: 'Brand & Product Design',
-    desc: 'Identity, web, and product UI built to look as intelligent as what runs underneath. Pixel-grade craft, never decorative.',
-    bullets: ['Brand identity systems', 'Product UI/UX', 'High-converting websites'],
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 19l7-7-3-3-7 7-1 4 4-1z"/>
-        <path d="M14 5l3 3"/>
-      </svg>
-    ),
-    accent: 'magenta',
-  },
-  {
-    title: 'AI Strategy & Advisory',
-    desc: 'For leadership teams: a clear, prioritized roadmap of where AI moves the needle and where it does not.',
-    bullets: ['Opportunity mapping', 'Build-vs-buy analysis', 'Hands-on enablement'],
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M3 3v18h18"/>
-        <path d="M7 14l4-4 3 3 5-6"/>
-      </svg>
-    ),
-    accent: 'gold',
-  },
-  {
-    title: 'Custom Software',
-    desc: 'When off-the-shelf falls short — production-grade web apps, integrations and data pipelines, built to your exact spec.',
-    bullets: ['Full-stack engineering', 'Data pipelines & ETL', 'Cloud infrastructure'],
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-        <polyline points="16 18 22 12 16 6"/>
-        <polyline points="8 6 2 12 8 18"/>
-      </svg>
-    ),
-    accent: 'violet',
-  },
-  {
-    title: 'Continuous Optimization',
-    desc: 'Once it ships, we don’t leave. Quarterly reviews, monitoring, and iteration so your AI stack keeps compounding value.',
-    bullets: ['Eval & monitoring', 'Quarterly roadmaps', 'Cost & quality tuning'],
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M21 12a9 9 0 1 1-3-6.7"/>
-        <polyline points="21 4 21 10 15 10"/>
-      </svg>
-    ),
-    accent: 'cyan',
-  },
+// Icons + accent colors are static (locale-independent), copy comes from translations.
+const meta = [
+  { accent: 'violet',  icon: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3" /><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1" /></svg>) },
+  { accent: 'cyan',    icon: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 10h18M8 14h2M12 14h4"/></svg>) },
+  { accent: 'magenta', icon: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M12 19l7-7-3-3-7 7-1 4 4-1z"/><path d="M14 5l3 3"/></svg>) },
+  { accent: 'gold',    icon: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>) },
+  { accent: 'violet',  icon: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>) },
+  { accent: 'cyan',    icon: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><polyline points="21 4 21 10 15 10"/></svg>) },
 ];
 
 export default function Services() {
+  const { t } = useLocale();
+  const services = t.services.items.map((s, i) => ({ ...s, ...meta[i] }));
+
   return (
     <section id="services">
       <div className="container">
         <div className="section-head reveal">
-          <span className="eyebrow"><span className="dot" />What we do</span>
-          <h2><span className="gradient-text">Six disciplines.</span> One studio.</h2>
-          <p>We pair senior engineers, designers and strategists in small teams. No handoffs, no agency bloat — every project ships in weeks, not quarters.</p>
+          <span className="eyebrow"><span className="dot" />{t.services.eyebrow}</span>
+          <h2><span className="gradient-text">{t.services.titleAccent}</span> {t.services.titleRest}</h2>
+          <p>{t.services.sub}</p>
         </div>
 
         <div className="services">

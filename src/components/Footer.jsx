@@ -1,6 +1,8 @@
 import React from 'react';
+import { useLocale } from '../i18n/LocaleContext.jsx';
 
 export default function Footer() {
+  const { t } = useLocale();
   return (
     <footer className="footer">
       <div className="container">
@@ -18,26 +20,26 @@ export default function Footer() {
               </svg>
               <span>Nyra</span>
             </div>
-            <p>An AI automation, digitalization and design studio building intelligent systems for ambitious teams.</p>
+            <p>{t.footer.tagline}</p>
           </div>
 
           <div className="footer__cols">
             <div>
-              <div className="footer__h">Studio</div>
-              <a href="#services">Services</a>
-              <a href="#process">Process</a>
-              <a href="#work">Case studies</a>
-              <a href="#testimonials">Clients</a>
+              <div className="footer__h">{t.footer.cols.studio.h}</div>
+              <a href="#services">{t.footer.cols.studio.services}</a>
+              <a href="#process">{t.footer.cols.studio.process}</a>
+              <a href="#work">{t.footer.cols.studio.work}</a>
+              <a href="#testimonials">{t.footer.cols.studio.clients}</a>
             </div>
             <div>
-              <div className="footer__h">Company</div>
-              <a href="#">About</a>
-              <a href="#">Careers</a>
-              <a href="#">Press</a>
-              <a href="#">Contact</a>
+              <div className="footer__h">{t.footer.cols.company.h}</div>
+              <a href="#">{t.footer.cols.company.about}</a>
+              <a href="#">{t.footer.cols.company.careers}</a>
+              <a href="#">{t.footer.cols.company.press}</a>
+              <a href="#">{t.footer.cols.company.contact}</a>
             </div>
             <div>
-              <div className="footer__h">Connect</div>
+              <div className="footer__h">{t.footer.cols.connect.h}</div>
               <a href="#">LinkedIn</a>
               <a href="#">X / Twitter</a>
               <a href="#">Dribbble</a>
@@ -47,11 +49,11 @@ export default function Footer() {
         </div>
 
         <div className="footer__bottom">
-          <span>© {new Date().getFullYear()} Nyra Studio. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} Nyra Studio. {t.footer.rights}</span>
           <span className="footer__legal">
-            <a href="#">Privacy</a>
-            <a href="#">Terms</a>
-            <a href="#">Cookies</a>
+            <a href="#">{t.footer.legal.privacy}</a>
+            <a href="#">{t.footer.legal.terms}</a>
+            <a href="#">{t.footer.legal.cookies}</a>
           </span>
         </div>
       </div>

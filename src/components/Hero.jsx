@@ -1,11 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import AnimatedBackground from './AnimatedBackground.jsx';
+import { useLocale } from '../i18n/LocaleContext.jsx';
 
 export default function Hero() {
+  const { t } = useLocale();
   const titleRef = useRef(null);
 
   useEffect(() => {
-    // subtle parallax on mouse move
     const onMove = (e) => {
       const x = (e.clientX / window.innerWidth - 0.5) * 12;
       const y = (e.clientY / window.innerHeight - 0.5) * 12;
@@ -22,22 +23,18 @@ export default function Hero() {
       <AnimatedBackground />
 
       <div className="container hero__inner">
-        <span className="eyebrow reveal in"><span className="dot" />AI · Automation · Design Studio</span>
+        <span className="eyebrow reveal in"><span className="dot" />{t.hero.eyebrow}</span>
 
         <h1 ref={titleRef} className="hero__title reveal in">
-          <span className="gradient-text">Intelligent systems</span><br />
-          for ambitious teams.
+          <span className="gradient-text">{t.hero.titleAccent}</span><br />
+          {t.hero.titleRest}
         </h1>
 
-        <p className="hero__sub reveal in">
-          Nyra is an AI automation, digitalization and design agency. We turn manual workflows
-          into autonomous products — pairing custom AI engineering with brand-grade design so the
-          result feels effortless to use, and impossible to ignore.
-        </p>
+        <p className="hero__sub reveal in">{t.hero.sub}</p>
 
         <div className="hero__cta reveal in">
           <a href="#contact" className="btn btn-primary">
-            Start a project
+            {t.hero.ctaPrimary}
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M5 12h14M13 5l7 7-7 7"/>
             </svg>
@@ -46,30 +43,30 @@ export default function Hero() {
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <polygon points="5 3 19 12 5 21 5 3" />
             </svg>
-            Watch reel
+            {t.hero.ctaSecondary}
           </a>
         </div>
 
         <div className="hero__meta reveal in">
           <div>
-            <strong>40+</strong>
-            <span>shipped automations</span>
+            <strong>{t.hero.meta.a.value}</strong>
+            <span>{t.hero.meta.a.label}</span>
           </div>
           <div className="div" />
           <div>
-            <strong>12</strong>
-            <span>countries served</span>
+            <strong>{t.hero.meta.b.value}</strong>
+            <span>{t.hero.meta.b.label}</span>
           </div>
           <div className="div" />
           <div>
-            <strong>98%</strong>
-            <span>retention rate</span>
+            <strong>{t.hero.meta.c.value}</strong>
+            <span>{t.hero.meta.c.label}</span>
           </div>
         </div>
       </div>
 
       <div className="hero__scroll" aria-hidden="true">
-        <span>Scroll</span>
+        <span>{t.hero.scroll}</span>
         <span className="line" />
       </div>
 

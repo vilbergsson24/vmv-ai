@@ -1,49 +1,25 @@
 import React from 'react';
+import { useLocale } from '../i18n/LocaleContext.jsx';
 
-// Curated Unsplash images that read as "AI / digital / design studio"
-const projects = [
-  {
-    client: 'Helix Logistics',
-    title: 'Autonomous dispatch agent for a 1,400-driver fleet',
-    tags: ['AI Automation', 'Operations'],
-    metric: '38% faster routing',
-    img: 'https://images.unsplash.com/photo-1581090700227-1e37b190418e?auto=format&fit=crop&w=1400&q=80',
-    accent: 'violet',
-  },
-  {
-    client: 'Northwind Health',
-    title: 'AI triage assistant deployed across 24 clinics',
-    tags: ['Healthcare AI', 'Product'],
-    metric: '6.4× faster intake',
-    img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1400&q=80',
-    accent: 'cyan',
-  },
-  {
-    client: 'Kallio Capital',
-    title: 'Investor-grade research dashboard, fully redesigned',
-    tags: ['Digitalization', 'Design'],
-    metric: '92 → 14 hours / report',
-    img: 'https://images.unsplash.com/photo-1551288049-1c9b16e1d4c8?auto=format&fit=crop&w=1400&q=80',
-    accent: 'magenta',
-  },
-  {
-    client: 'Polaris Studios',
-    title: 'Brand system + AI-assisted content engine',
-    tags: ['Brand', 'AI Content'],
-    metric: '11× publishing volume',
-    img: 'https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=1400&q=80',
-    accent: 'gold',
-  },
+// Static visual data (images, accents) — locale-independent.
+const visuals = [
+  { img: 'https://images.unsplash.com/photo-1581090700227-1e37b190418e?auto=format&fit=crop&w=1400&q=80', accent: 'violet' },
+  { img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1400&q=80', accent: 'cyan' },
+  { img: 'https://images.unsplash.com/photo-1551288049-1c9b16e1d4c8?auto=format&fit=crop&w=1400&q=80', accent: 'magenta' },
+  { img: 'https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=1400&q=80', accent: 'gold' },
 ];
 
 export default function Showcase() {
+  const { t } = useLocale();
+  const projects = t.showcase.items.map((p, i) => ({ ...p, ...visuals[i] }));
+
   return (
     <section id="work">
       <div className="container">
         <div className="section-head reveal">
-          <span className="eyebrow"><span className="dot" />Selected work</span>
-          <h2>Outcomes, <span className="gradient-text">not deliverables.</span></h2>
-          <p>A small sample of recent engagements. Every case study is a measured business outcome, not a screenshot of a UI.</p>
+          <span className="eyebrow"><span className="dot" />{t.showcase.eyebrow}</span>
+          <h2>{t.showcase.title} <span className="gradient-text">{t.showcase.accent}</span></h2>
+          <p>{t.showcase.sub}</p>
         </div>
 
         <div className="show">
@@ -56,12 +32,12 @@ export default function Showcase() {
               </div>
               <div className="show__body">
                 <div className="show__tags">
-                  {p.tags.map((t) => <span key={t} className="show__tag">{t}</span>)}
+                  {p.tags.map((tag) => <span key={tag} className="show__tag">{tag}</span>)}
                 </div>
                 <div className="show__client">{p.client}</div>
                 <h3 className="show__title">{p.title}</h3>
                 <span className="show__cta">
-                  Read case study
+                  {t.showcase.readCase}
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M7 17L17 7M17 7H8M17 7v9"/>
                   </svg>

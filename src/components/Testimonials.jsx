@@ -1,33 +1,22 @@
 import React from 'react';
+import { useLocale } from '../i18n/LocaleContext.jsx';
 
-const quotes = [
-  {
-    q: 'Nyra rebuilt our intake process around a custom AI agent in five weeks. We replaced two full-time roles and the experience for our customers is dramatically better.',
-    name: 'Léa Marchetti',
-    role: 'COO, Northwind Health',
-    avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=200&q=80',
-  },
-  {
-    q: 'They are equally at home in a board room and in our codebase. The roadmap they delivered is the most useful strategic document I have read in years.',
-    name: 'Daniel Þórsson',
-    role: 'CEO, Kallio Capital',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80',
-  },
-  {
-    q: 'The level of design polish on what is essentially internal tooling is something I have not seen from any other studio. Our team actually asks to use the dashboards.',
-    name: 'Priya Raghavan',
-    role: 'VP Product, Helix Logistics',
-    avatar: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=200&q=80',
-  },
+const avatars = [
+  'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=200&q=80',
+  'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80',
+  'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=200&q=80',
 ];
 
 export default function Testimonials() {
+  const { t } = useLocale();
+  const quotes = t.testimonials.items.map((q, i) => ({ ...q, avatar: avatars[i] }));
+
   return (
     <section id="testimonials">
       <div className="container">
         <div className="section-head reveal">
-          <span className="eyebrow"><span className="dot" />Clients</span>
-          <h2>The kind of partnership <span className="gradient-text">people remember.</span></h2>
+          <span className="eyebrow"><span className="dot" />{t.testimonials.eyebrow}</span>
+          <h2>{t.testimonials.title} <span className="gradient-text">{t.testimonials.accent}</span></h2>
         </div>
 
         <div className="quotes">
